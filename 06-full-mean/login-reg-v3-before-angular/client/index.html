@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Login Registartion V3</title>
+</head>
+<body>
+    <h1>Login and Registration V3</h1>
+    <fieldset><legend>Login</legend>
+        <form action="/login" method="POST">
+            <label for="email">
+                Email: <input type="email" name="email" id="email">
+            </label>
+            <label for="password">
+                Password: <input type="password" name="password" id="password">
+            </label>
+            <input type="submit" value="Login">
+        </form>
+    </fieldset>
+    <fieldset><legend>Register</legend>
+        <form action="/register" method="POST">
+            <label for="first_name">
+                First Name: <input type="text" name="first_name" id="first_name">
+            </label>
+            <label for="last_name">
+                Last Name: <input type="text" name="last_name" id="last_name">
+            </label>
+            <label for="email">
+                Email: <input type="email" name="email" id="email">
+            </label>
+            <label for="email_confirm">
+                Confirm Email: <input type="email" name="email_confirm" id="email_confirm">
+            </label>
+            <label for="birthday">
+                Birthday: <input type="date" name="birthday" id="birthday">
+            </label>
+            <label for="password">
+                Password: <input type="password" name="password" id="password">
+            </label>
+            <label for="password_confirm">
+                Confirm Password: <input type="password" name="password_confirm" id="password_confirm">
+            </label>
+            <input type="submit" value="Register">
+        </form>
+    </fieldset>
+</body>
+</html>

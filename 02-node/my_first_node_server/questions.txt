@@ -1,0 +1,2 @@
+1. why does 'default' appear after an output when running `node` in terminal?
+

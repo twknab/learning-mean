@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>My First Mongoose App!</title>
+</head>
+<body>
+	<h1>Welcome to my first app using Mongoose!</h1>
+	<form action="/users" method='POST'>
+		Name: <input type="text" name="name" id="name">
+		Age: <input type="text" name="age" id="age">
+		<input type="submit" value="Send!">
+	</form>
+	<h2>Existing Users</h2>
+	<% if (users) { %>
+		<% for (var x in users) { %>
+			<ul>
+				<li>Name: <%=users[x].name%></li>
+				<li>Age: <%=users[x].age%></li>
+			</ul>
+		<% } %>
+	<% } %>
+</body>
+</html>

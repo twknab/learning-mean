@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Dojo Query Project</title>
+	<!-- <script src="main.js"></script> -->
+</head>
+<body>
+	<h1>Dojo Query...cool</h1>
+	<button id='clickButton'>Run Dojo Query Click Function</button>
+	<script>
+		function $Dojo(id){
+			console.log(id);
+			this.myId = document.getElementById(id);
+			console.log(this.myId);
+
+			this.click = function(callbackFunction){
+				console.log(this.myId);
+				console.log('Click function was run...*click*');
+				this.myId.addEventListener('click', callbackFunction);
+			};
+
+			this.hover = function(callbackHoverOn, callbackHoverOff){
+				console.log(this.myId);
+				console.log('Hover function running...');
+				this.myId.addEventListener('mouseover', callbackHoverOn);
+				this.myId.addEventListener('mouseout', callbackHoverOff);
+
+			}
+
+			return this;
+
+		}
+
+		$Dojo('clickButton').click(function(){console.log('I am running...')});
+		$Dojo('clickButton').hover(function(){console.log('Hovered on....')}, function(){console.log('Hovered off....')});
+	</script>
+</body>
+</html>

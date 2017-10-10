@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app"> <!-- name must match module setup name -->
+<head>
+	<meta charset="UTF-8">
+	<title>First Angular Application</title>
+	<script src="bower_components/angular/angular.min.js"></script>
+	<script src="main.js"></script>
+</head>
+<body>
+	<h1>My Angular Controller Data:</h1>
+	<div ng-controller="divController">
+		<ul>
+			<li ng-bind="myName"></li>
+			<li ng-bind="myFavoriteLanguage"></li>
+			<li ng-bind="myFavoriteJSLibrary"></li>
+		</ul>
+	</div>
+</body>
+</html>

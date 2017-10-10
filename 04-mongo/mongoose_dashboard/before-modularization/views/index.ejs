@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>My Mongoose Dashboard of Cats!</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</head>
+<body>
+	<a href="/ajax_style">AJAX Style Add Cat</a>
+	<h1>Welcome to the "Cat"-a-log</h1>
+	<p>Checkout all the fuzzy critters!</p>
+	<h3>The Cat Crew:</h3>
+	<% if (cats) { %>
+		<% for (var x in cats) { %>
+			<ul>
+				<li>Name: <%=cats[x].name%></li>
+				<li>Color: <%=cats[x].color%></li>
+				<li>Hair Type: <%=cats[x].hair%></li>
+				<li><a href='cats/<%=cats[x].id%>/edit'>Edit Cat</a></li>
+				<form action="cats/<%=cats[x].id%>/destroy" method='POST'>
+					<li><input type="submit" value="Delete Cat"></li>
+				</form>
+			</ul>
+		<% } %>
+	<% } %>
+	<a href="/cats/new">Add Cat</a>
+</body>
+</html>

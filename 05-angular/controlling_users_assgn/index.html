@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+	<meta charset="UTF-8">
+	<title>Controlling Users Assignment</title>
+	<script src="bower_components/angular/angular.js"></script>
+	<script src="main.js"></script>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body ng-controller='users'>
+	<h1>Users Controller Assignment:</h1>
+	<p>In this assignment we're going to build a table-like page in which we can store users with some information, and then later delete them.</p>
+	<form ng-submit="addUser()">
+		First Name: <input type="text" placeholder="ie, John" ng-model="user.first_name">
+		Last Name: <input type="text" placeholder='ie, Doe' ng-model="user.last_name">
+		Favorite Language: <input type="text" placeholder='ie, JavaScript' ng-model="user.language">
+		<input type="submit" value="Create User">
+	</form>
+	<div>
+		<div class='table'><strong>First Name:</strong>
+			<p id="users" ng-repeat="user in users" ng-bind="user.first_name"></p>
+		</div>
+		<div class='table'><strong>Last Name:</strong>
+			<p id="users" ng-repeat="user in users" ng-bind="user.last_name"></p>
+		</div>
+		<div class='table'><strong>Favorite Language:</strong>
+			<p id="users" ng-repeat="user in users" ng-bind="user.language"></p>
+		</div>
+		<div class='table'><strong>Actions:</strong>
+			<form class='delete' id="users" ng-repeat="user in users">
+				<input type="submit" value="Delete User" ng-click="deleteUser(user)">
+			</form>
+		</div>
+
+			<!-- note: you can also use track by $index to get index values -->
+			<!-- when i tried to splice the object however, by this value, I was getting some weird behavior,
+			it is possible I had something setup incorrectly. Here's a snippet below to experiment -->
+
+				<!-- <div ng-repeat="user in users track by $index">
+					<p>First Name: {{user.first_name}}</p>
+					<p>Last Name: {{user.last_name}}</p>
+					<p>Fav. Language: {{user.language}}</p>
+					<form class='delete' id="users">
+						<input type="submit" value="Delete User" ng-click="deleteUser(user)">
+					</form>
+				<hr>
+				</div> -->
+	</div>
+</body>
+</html>

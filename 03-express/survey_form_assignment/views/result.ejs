@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Survey Result</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<h1>Your Survey Result:</h1>
+	<div class='result'>
+		<hr>
+		<% if (surveyData) { %>
+			<h1>Name: <%=surveyData.name%></h1>
+			<h2>Location: <%=surveyData.location%></h2>
+			<h3>Favorite Language: <%=surveyData.language%></h3>
+			<h4>Comments: <%=surveyData.comments%></h4>
+		<% } %>
+		<a href="/">Take Me Home</a>
+	</div>
+</body>
+</html>

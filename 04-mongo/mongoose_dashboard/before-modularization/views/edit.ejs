@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Edit A Cat!</title>
+</head>
+<body>
+	<% if (cat) { %>
+		<h1>Edit <%=cat.name%>:</h1>
+		<form action="/cats/<%=cat._id%>" method="POST">
+			Name: <input type="text" name="name" id="name" value="<%=cat.name%>">
+			Color: <input type="text" name="color" id="color" value="<%=cat.color%>">
+			Hair: <input type="text" name="hair" id="hair" value="<%=cat.hair%>">
+			<input type="submit" value="Update Cat Info!">
+			<button type='submit' formaction='/' formmethod='GET'>Cancel</button>
+		</form>
+	<% } %>
+</body>
+</html>

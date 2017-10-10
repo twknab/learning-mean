@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+	<meta charset="UTF-8">
+	<title>My Angular App using Modules!</title>
+	<script src="bower_components/angular/angular.js"></script>
+	<script>
+		var myAppModule = angular.module('myApp', []); // name must match ng-app above
+		// setting up our controller off our of myAppModule object
+		myAppModule.controller('studentsController', function($scope){
+			var mySomething = 'My String'; // you can store data this way also
+			$scope.students = [
+				{name: 'Tim', age: 32},
+				{name: 'Phil', age: 23},
+				{name: 'Lawrence', age: 64},
+			];
+			$scope.addStudent = function(){
+				$scope.students.push($scope.newStudent);
+				$scope.newStudent = {};
+			}
+		});
+	</script>
+</head>
+<body>
+	<h1>Using Modules in Angular and using $scope!</h1>
+	<h3>These values are defined using a directive only:</h3>
+	<div ng-init=" students=[{name: 'AJ', age: 15},{name: 'CJ', age: 17},{ name: 'DJ', age: 25},{name: 'LJ', age: 52}] ">
+		<ul>
+			<li ng-repeat=" student in students ">{{ student.name }} {{ student.age }}</li>
+		</ul>
+	</div>
+	<h3>These values are defined using a controller in the head of our document:</h3>
+	<div ng-controller="studentsController">
+		<ul>
+			<li ng-repeat="student in students">{{ student.name }} {{ student.age }}</li>
+		</ul>
+		<h5>We can update our controller from our view:</h5>
+		<form>
+			<!-- creates a new model called newStudent with the property of 'name' and 'age': -->
+			Name: <input type="text" name="name" ng-model="newStudent.name">
+			Age: <input type="text" name="age" ng-model="newStudent.age"> 
+			<input type="submit" value="Add New Student!" ng-click="addStudent()">
+		</form>
+	</div>
+</body>
+</html>

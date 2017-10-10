@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Dojo Message Board (Using Mongoose and Node!)</title>
+	<style>
+		* {font-family: monospace; margin: 15px;}
+		.makePost {
+		    padding: 20px;
+		    border-radius: 15px;
+		    background-color: #673AB7;
+		    color: white;
+		    text-shadow: 1px 1px 1px black;
+		}
+		.message {
+			padding: 20px;
+			background-color: #CDDC39;
+			border-radius: 15px;
+		    color: white;
+		    text-shadow: 1px 1px 1px black;
+		}
+		.comment {    
+			margin-left: 80px;
+		    padding: 20px;
+		    background-color: #00BCD4;
+		    border-radius: 15px;
+		    color: white;
+		    text-shadow: 1px 1px 1px black;
+		}
+		.makeComment {
+			margin-left: 80px;
+			padding: 20px;
+			background-color: #FF5722;
+			border-radius: 15px;
+		    color: white;
+		    text-shadow: 1px 1px 1px black;
+		}
+		.bold {
+			font-weight: bolder;
+		}
+		.large {
+			font-size: 1.4em;
+		}
+		.commentTitle {
+			margin-left: 80px;
+		}
+		.error {
+			color: red;
+		}
+	</style>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			
+			function showAll(){
+				$.ajax({
+					url: '/all',
+					type: 'GET',
+					dataType: 'json',
+				})
+				.done(function(allPosts) {
+					console.log("success");
+					// Gets all posts and comments and writes into DOM:
+					var indexStr = '';
+					indexStr += '<h1>The Dojo Message Board - AJAX Style! 8)</h1>';
+					indexStr += '<p>Welcome to the Coding Dojo Message Board, built using NodeJS and Mongoose! This project features validations and ajax. To begin post a message below:</p>';
+					indexStr += '<form action="/" method="POST" class="makePost">';
+					indexStr += 'Name: <input type="text" name="name" id="name"><br/>';
+					indexStr += 'Message: <br/><textarea name="message" id="message" cols="30" rows="10"></textarea>';
+					indexStr += '<input type="submit" value="Post Message">';
+					indexStr += '</form>';
+					indexStr += '<hr>';
+					for (var x = 0; x < allPosts.length; x++) {
+						var postTime = new Date(allPosts[x].createdAt).toLocaleTimeString();
+						var postDate = new Date(allPosts[x].createdAt).toLocaleDateString();
+						indexStr += '<h1>Post:</h1>';
+						indexStr += '<div>';
+						indexStr += '<div class="message">';
+						indexStr += '<p>On ' + postDate + ' at ' + postTime + ':</p>';
+						indexStr += '<p class="bold large">' + allPosts[x].name + ' says,</p>';
+						indexStr += '<p>"' + allPosts[x].message + '"</p>';
+						indexStr += '</div>';
+						indexStr += '<h3 class="commentTitle">Comments:</h3>';
+						
+						indexStr += '<div class="allComments" id="' + allPosts[x]._id +'">';
+						for (var y = 0; y < allPosts[x]._comments.length; y++) {
+							var commentTime = new Date(allPosts[x]._comments[y].createdAt).toLocaleTimeString();
+							var commentDate = new Date(allPosts[x]._comments[y].createdAt).toLocaleDateString();
+							indexStr += '<div class="comment">';
+							indexStr += '<p>On ' + commentDate + '; at ' + commentTime + ':</p>';
+							indexStr += '<p class="bold">'+allPosts[x]._comments[y].name+' Says,</p>';
+							indexStr += '<p>"'+allPosts[x]._comments[y].message+'"</p>';
+							indexStr += '</div>';
+						}
+						indexStr += '</div>';
+						indexStr += '<div class="makeComment">';
+						indexStr += '<h3>Make a Comment:</h3>';
+						indexStr += '<form action="/' + allPosts[x]._id + '/comment" method="POST" class="commentForm" id="' + allPosts[x]._id + '">';
+						indexStr += 'Name: <input type="text" name="name" id="name"><br/>';
+						indexStr += 'Comment: <br/><textarea name="message" id="message" cols="30" rows="10"></textarea>';
+							indexStr += '<input type="submit" value="Post Comment">';
+						indexStr += '</form>';
+						indexStr += '</div>';
+						indexStr += '</div>';
+					}
+					$('body').html(indexStr);
+				})
+				.fail(function() {
+					console.log("error");
+				})
+				.always(function() {
+					console.log("complete");
+				});
+				
+			} // end showAll();
+			
+			showAll();
+
+
+			// Comments Submission AJAX Style:
+			$('form.commentForm').submit(function(event) {
+				var postId = $(this).attr('id');
+				$.ajax({
+					url: '/' + postId +'/comment',
+					type: 'POST',
+					dataType: 'json',
+					data: $(this).serialize(),
+				})
+				.done(function(newComment) {
+					// console.log("success!!", newComment);
+					// var newCommentTime = new Date(newComment.createdAt).toLocaleTimeString();
+					// var newCommentDate = new Date(newComment.createdAt).toLocaleDateString();
+					// console.log(newCommentTime, newCommentDate);
+					// var htmlStr = '';
+					// htmlStr += '<div class="comment">';
+					// htmlStr += '<p>On '+newCommentDate+' at '+newCommentTime+':</p>';
+					// htmlStr += '<p class="bold">'+newComment.name+' Says,</p>';
+					// htmlStr += '<p>"'+newComment.message+'"</p>';
+					// htmlStr += '</div>';
+					// console.log(htmlStr);
+					// $('div.allComments#'+ postId).append(htmlStr);
+					// $('form[id="'+ postId +'"] #name, #message').val(''); // clears form fields
+				})
+				.fail(function() {
+					console.log("error");
+				})
+				.always(function() {
+					console.log("complete");
+				});
+				return false;
+			});
+
+			// Posts Submission AJAX Style:
+			$('form.makePost').submit(function(event) {
+				$.ajax({
+					url: '/',
+					type: 'POST',
+					dataType: 'json',
+					data: $(this).serialize(),
+				})
+				.done(function(newPost) {
+					// console.log("success", newPost);
+					// var htmlStr = '';
+					// htmlStr += '<h1>Post:</h1>';
+					// htmlStr += '<div>';
+					// htmlStr += '<div class="message">';
+					// htmlStr += '<p>On at:</p>';
+					// htmlStr += '<p class="bold large">'+newPost.name+' says,</p>';
+					// htmlStr += '<p>"'+newPost.message+'"</p>';
+					// htmlStr += '</div>';
+					// htmlStr += '<h3 class="commentTitle">Comments:</h3>';
+					// htmlStr += '<div class="allComments" id='+newPost._id+'>';
+					// htmlStr += '</div>';
+					// htmlStr += '<div class="makeComment">';
+					// htmlStr += '<h3>Make a Comment:</h3>';
+					// htmlStr += '<form action="/'+newPost._id+'/comment" method="POST" class="commentForm" id="'+newPost._id+'">';
+					// htmlStr += 'Name: <input type="text" name="name" id="name"><br/>'
+					// htmlStr += 'Comment: <br/><textarea name="message" id="message" cols="30" rows="10"></textarea>'
+					// htmlStr += '<input type="submit" value="Post Comment">'
+					// htmlStr += '</form>'
+					// htmlStr += '</div>'
+					// htmlStr += '</div>'
+
+					// $('body').append(htmlStr);
+				})
+				.fail(function() {
+					console.log("error");
+				})
+				.always(function() {
+					console.log("complete");
+				});
+				
+				return false;
+			});
+
+
+		});
+	</script>
+</head>
+<body>
+</body>
+</html>

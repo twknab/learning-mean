@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .left,
+        .right {
+            display: inline-block;
+            width: 45%;
+            border: 1px solid black;
+            vertical-align: top;
+            max-height: 400px;
+            overflow-y: scroll;
+            padding: 5px;
+        }
+    </style>
+    <script src="bower_components/angular/angular.js" charset="utf-8">
+    </script>
+    <script>
+        var app = angular.module('app', []);
+
+        /*
+        this is our controller as set_up
+        */
+        app.controller('foodsController', [foodsController]);
+
+        function foodsController() {
+            this.foods = [];
+        }
+        // remember prototype?
+        foodsController.prototype.addFood = function() {
+            this.foods.push(this.food);
+            this.food = '';
+            return this;
+        }
+    </script>
+
+</head>
+
+<body>
+    <div ng-controller='foodsController as FC'>
+        <div class="left">
+            <h2><u>Add Food</u></h2>
+            <form ng-submit="FC.addFood()">
+                <input type="text" ng-model='FC.food'>
+                <input type="submit" value="add">
+            </form>
+            <p ng-if="FC.food">
+                You are currently typing: {{FC.food}}
+            </p>
+        </div>
+        <div class="right">
+            <h2><u>Food Stuff</u></h2>
+            <input placeholder="filter..." type="text" ng-model="FC.foodFilter">
+            <div ng-repeat="food in FC.foods | filter:FC.foodFilter track by $index">
+                <p>{{food}}</p>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+	<meta charset="UTF-8">
+	<title>My Angular App using Modules!</title>
+	<script src="../bower_components/angular/angular.js"></script>
+	<script>
+		var myAppModule = angular.module('myApp', []); // name must match ng-app above
+		// setting up our controller off our of myAppModule object
+		myAppModule.controller('studentsController', function(){
+			this.students = [
+				{name: 'Tim', age: 32},
+				{name: 'Phil', age: 23},
+				{name: 'Lawrence', age: 64},
+			];
+			this.addStudent = function(){
+				this.students.push(this.newStudent);
+				this.newStudent = {};
+			}
+		});
+	</script>
+</head>
+<body>
+	<h1>Using Modules in Angular using 'this' only (NOT $scope)!</h1>
+	<h3>These values are defined using a controller in the head of our document:</h3>
+	<div ng-controller="studentsController as studentsCtrl">
+		<ul>
+			<li ng-repeat="student in studentsCtrl.students">{{ student.name }} {{ student.age }}</li>
+		</ul>
+		<h5>We can update our controller from our view:</h5>
+		<form>
+			Name: <input type="text" name="name" ng-model="studentsCtrl.newStudent.name">
+			Age: <input type="text" name="age" ng-model="studentsCtrl.newStudent.age">
+			<input type="submit" value="Add New Student!" ng-click="studentsCtrl.addStudent()">
+		</form>
+	</div>
+</body>
+</html>

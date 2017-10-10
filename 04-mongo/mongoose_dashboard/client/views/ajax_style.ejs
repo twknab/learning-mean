@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Add A Cat (AJAX Style)!</title>
+	<link rel="stylesheet" href="style.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			$('form').submit(function() {
+				$.ajax({
+					url: '/cats_ajax',
+					method: 'POST',
+					// data: {name: $('#name').val(), color: $('#color').val(), hair: $('#hair')},
+					data: $(this).serialize(),
+				})
+				.done(function(allCats) {
+					console.log("success", allCats);
+					$('div').html('');
+					for (var x in allCats){
+						$('#allCats').append('<ul><li>Name: ' + allCats[x].name + '</li><li>Color: ' + allCats[x].color + '</li><li>Hair: ' + allCats[x].hair + '</li><li><form><button type="submit" formaction="/cats_ajax/'+allCats[x]._id+'/edit" formmethod="GET">Edit</button></form></li><li><form><button type="submit" formaction="/cats_ajax/'+allCats[x]._id+'" formmethod="POST">Delete</button></form></li></ul>');
+					};
+
+				})
+				.fail(function(err) {
+					console.log("error", err);
+					$('div').html('');
+					$('.errors').append(err.responseJSON.message);
+				})
+
+				return false;
+			});
+
+
+
+		});
+	</script>
+</head>
+<body>
+	<a href="/">Take Me Home</a>
+	<div class='errors' style='color:red; padding: 20px; font-weight: bolder;'></div>
+	<h1>Add A Cat (AJAX Style)!</h1>
+	<form>
+		Name: <input type="text" name="name" id="name">
+		Color: <input type="text" name="color" id="color">
+		Hair Type: <input type="text" name="hair" id="hair">
+		<input type="submit" value="Add Cat!">
+	</form>
+	<h2>All Cats:</h2>
+	<div id='allCats'></div>
+</body>
+</html>

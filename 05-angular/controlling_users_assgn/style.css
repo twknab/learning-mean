@@ -1,0 +1,14 @@
+.table {
+	display: inline-block;
+	vertical-align: top;
+	padding: 15px;
+}
+
+.delete {
+	margin-top: 16px;
+	margin-bottom: 16px;
+}
+
+#users {
+	margin-top: 30px;
+}

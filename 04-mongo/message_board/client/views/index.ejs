@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Dojo Message Board (Using Mongoose and Node!)</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<h1>The Dojo Message Board</h1>
+	<p>Welcome to the Coding Dojo Message Board, built using NodeJS and Mongoose! This project features validations and ajax. To begin post a message below:</p>
+	<form action="/" method="POST" class='makePost'>
+		Name: <input type="text" name="name" id="name"><br/>
+		Message: <br/><textarea name="message" id="message" cols="30" rows="10"></textarea>
+		<input type="submit" value="Post Message">
+	</form>
+	<hr>
+	<!-- Begin Repeating Message Data -->
+	 <% if(typeof(errors) != 'undefined' ) { %>
+	 	<h2 class='error'>Before you submit...</h2>
+	 		<ul>
+			    <% for (var x in errors) { %>
+				    <li><h3 class='error'><%= errors[x].message %></h3></li>
+			    <% } %>
+		    </ul>
+ 	 <% } else { %>
+		<% if (allPosts) { %>
+			<% for (var x in allPosts) { %>
+				<h1>Post:</h1>
+				<div>
+					<div class='message'>
+						<p>On <%=allPosts[x].createdAt.toLocaleDateString()%> at <%=allPosts[x].createdAt.toLocaleTimeString()%>:</p>
+						<p class='bold large'><%=allPosts[x].name%> says,</p>
+						<p>"<%=allPosts[x].message%>"</p>
+					</div>
+					<h3 class='commentTitle'>Comments:</h3>
+						<% for (var y = 0; y < allPosts[x]._comments.length; y++) { %>
+							<% console.log(allPosts[x]._comments)%>					
+							<div class='comment'>
+								<p>On <%=allPosts[x]._comments[y].createdAt.toLocaleDateString()%> at <%=allPosts[x]._comments[y].createdAt.toLocaleTimeString()%>:</p>
+								<p class='bold'><%=allPosts[x]._comments[y].name%> Says,</p>
+								<p>"<%=allPosts[x]._comments[y].message%>"</p>
+							</div>
+						<% } %>					
+					<div class='makeComment'>
+						<h3>Make a Comment:</h3>
+						<form action='/<%=allPosts[x]._id%>/comment' method='POST'>
+							Name: <input type="text" name="name" id="name"><br/>
+							Comment: <br/><textarea name="message" id="message" cols="30" rows="10"></textarea>
+							<input type="submit" value="Post Comment">
+						</form>
+					</div>
+				</div>
+			<% } %>
+		<% } %>
+ 	 <% } %>
+	<!-- End Repeating Message Data -->
+</body>
+</html>

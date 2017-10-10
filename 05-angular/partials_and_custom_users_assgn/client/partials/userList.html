@@ -1,0 +1,14 @@
+<fieldset><legend>User List's Controller</legend>
+	<table>
+		<tr>
+			<th>First Name:</th>
+			<th>Last Name:</th>
+			<th>Favorite Language:</th>
+		</tr>
+		<tr ng-repeat="user in users">
+			<td ng-bind="user.first_name"></td>
+			<td ng-bind="user.last_name"></td>
+			<td ng-bind="user.language"></td>
+		</tr>
+	</table>
+</fieldset>

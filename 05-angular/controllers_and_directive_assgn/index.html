@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+	<meta charset="UTF-8">
+	<title>Controllers and Directives Assignment</title>
+	<script src="bower_components/angular/angular.js"></script>
+	<script src="main.js"></script>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body ng-controller="favFoods">
+	<h1>More with Controllers and Directives</h1>
+	<p>Add foods first using the form:</p>
+	<form>
+		Favorite Food: <input type="text" ng-model="favFood">
+		<input type="submit" value="Add Food!" ng-click="addFood()">
+	</form>
+	<div>
+		Currently Typing: <span ng-bind="favFood"></span> <!-- model to show typing -->
+	</div>
+	<div style="margin-top:25px;">
+		<h3>Now, try filtering your existing list:</h3>
+		<input type="text" placeholder="Filter by..." ng-model="filter">
+		<div>
+			<ul>
+				<li ng-repeat="food in foods | filter:filter as results">{{food}}</li>
+				<li ng-if="results.length === 0">No foods found...</li>
+			</ul>
+		</div> <!-- foods added -->
+	</div>
+</body>
+</html>

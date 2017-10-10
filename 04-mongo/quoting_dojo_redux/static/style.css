@@ -1,0 +1,46 @@
+* {
+	margin: 0px;
+	padding: 0px;
+}
+
+body {
+	margin: 15px;
+}
+
+.quoteWrapper {
+	display: inline-block;
+}
+
+.arrows {
+	display: inline-block;
+	margin: 10px;
+}
+
+.quote {
+	display: inline-block;
+	vertical-align: top;
+	padding: 20px;
+}
+
+.upArrow {
+	font-size: 2em;
+}
+
+.downArrow {
+	font-size: 2em;
+}
+
+.upArrow:hover, .downArrow:hover {
+	color: green;
+}
+
+.vote {
+    display: inline-block;
+    vertical-align: top;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+#makeQuote {
+	margin: 15px;
+}

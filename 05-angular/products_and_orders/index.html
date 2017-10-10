@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+	<meta charset="UTF-8">
+	<title>Products and Orders</title>
+	<link rel="stylesheet" href="style.css">
+	<script src="bower_components/angular/angular.js"></script>
+	<script src="main.js"></script>
+</head>
+<body>
+	<h1>Products and Orders</h1>
+	<p>This project uses one Factory of Angular data to manage two different Controllers. The product creation is controlled by one Controller, and the order display and purchasing is controlled by a second Controller. Note: remember, both controllers share the same factory data, so when we add a new product, the orders automatically update with the new product.</p>
+	<h4>Give it a try!</h4>
+	<fieldset ng-controller="productController"><legend>Products Controller</legend>
+		<form ng-submit="create()">
+			Product Name: <input type="text" name="name" id="name" ng-model="product.name">
+			Product Price: <input type="number" name="price" id="price" ng-model="product.price">
+			<input type="submit" value="Add Product">
+		</form>
+		<table>
+			<tr>
+				<th>Name</th>
+				<th>Price</th>
+				<th>Actions</th>
+			</tr>	
+			<tr ng-repeat="product in products | orderBy: 'price' track by $index">
+				<td ng-bind="product.name">Keyboard</td>
+				<td ng-bind="product.price | currency">$149.99</td>
+				<td><button ng-click="destroy($index)">Delete</button></td>
+			</tr>
+		</table>
+	</fieldset>
+	<fieldset ng-controller="orderController"><legend>Orders Controller</legend>
+		<table>
+			<tr>
+				<th>Name</th>
+				<th>Price</th>
+				<th>Qty</th>
+				<th>Actions</th>
+			</tr>
+			<tr ng-repeat="order in orders | orderBy: '-price'">
+				<td ng-bind="order.name">Keyboard</td>
+				<td ng-bind="order.price | currency">$149.99</td>
+				<td ng-bind="order.quantity">50</td>
+				<td><button ng-click="buy(order)">Buy</button></td>
+			</tr>
+		</table>
+	</fieldset>
+</body>
+</html>

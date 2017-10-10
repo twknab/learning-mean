@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Test Index</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<h1>Survey</h1>
+	<form action="/submit" method='POST'>
+		First Name: <input type="text" name="firstName" id="firstName">
+		Last Name: <input type="text" name="lastName" id="lastName">
+		<input type="submit" value="Submit Survey!">
+	</form>
+	<h3>Your input:</h3>
+	<% if (data) { %>
+		<% for (user in data) { %>
+			<h2><%= data[user].firstName+' '+data[user].lastName%></h2>
+		<% } %>
+	<% } %>
+	<form action="/reset" method='GET' id='reset'>
+		<button form='reset'>Resets</button>
+	</form>
+</body>
+</html>

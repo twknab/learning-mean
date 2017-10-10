@@ -1,0 +1,17 @@
+<h3><span ng-bind="foundFriend.first_name"></span> <span ng-bind="foundFriend.last_name"></span></h3>
+<form>
+	First Name: <input type="text" value="{{foundFriend.first_name}}">
+	Last Name: <input type="text" value="{{foundFriend.last_name}}">
+	Birthday: <input type="date" ng-model="foundFriend.birthday">
+	Created At: <input type="date" ng-model="foundFriend.createdAt">
+	Updated At: <input type="date" ng-model="foundFriend.updatedAt">
+</form>
+<fieldset><legend>Friend Data:</legend>
+	<h4>Birthday:</h4>
+	<ul><li><span ng-bind="foundFriend.birthday | date "></span></li></ul>
+	<h4>Created At:</h4> 
+	<ul><li><span ng-bind="foundFriend.createdAt | date : 'MMM d, y @ hh:mm:ss a'"></span></li></ul>
+	<h4>Last Updated At:</h4> 
+	<ul><li><span ng-bind="foundFriend.updatedAt | date : 'MMM d, y @ hh:mm:ss a'"></span></li></ul>
+</fieldset>
+<a href="/#/">Take Me Home</a>

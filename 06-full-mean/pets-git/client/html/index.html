@@ -1,0 +1,18 @@
+<h2>This is the Index Partial.</h2>
+<a href="#!/create">Create Pet</a>
+<fieldset><legend>Existing Pets</legend>
+<table>
+    <tr>
+        <th>Pet Name:</th>
+        <th>Breed:</th>
+        <th>Actions:</th>
+    </tr>
+    <tr ng-repeat='pet in pets'>
+        <td><a href="#!/show/{{pet._id}}">{{pet.name}}</a></td>
+        <td ng-bind="pet.breed"></td>
+        <td><a href="" ng-click="delete(pet._id)">Delete</a> | <a href="#!/edit/{{pet._id}}">Edit</a></td>
+    </tr>
+</table>
+</fieldset>
+<img src="img/full_mean.jpg" alt="MEAN Data Flow" width="800">
+<p>This is how the flow of data should move through each file.</p>

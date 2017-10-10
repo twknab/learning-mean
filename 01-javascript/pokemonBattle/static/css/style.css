@@ -1,0 +1,71 @@
+/* CSS Document for Pokemon Battle Assignment */
+
+/********************/
+/*	 Main Styling 	*/
+/********************/
+img {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+body {
+	margin: 30px;
+	padding: 20px;
+}
+
+.alert {
+	background-color: orange;
+	padding: 10px;
+	margin: 20px;
+}
+
+.ready {
+	background-color: lightgreen;
+	padding: 10px;
+	margin: 20px;
+}
+
+.damage {
+	background-color: red;
+	padding: 10px;
+	margin: 20px;
+}
+
+.player {
+	border: 10px solid #d5d5d5;
+	padding: 15px;
+	margin: 20px;
+	display: inline-block;
+	vertical-align: top;
+	width: 230px;
+	height: 440px;
+}
+
+.pokeattribute {
+	text-align: center;
+}
+
+.turn {
+	border-color: lightgreen;
+}
+
+
+.lowHealth {
+	color: red;
+}
+
+#battle {
+	display: none;
+}
+
+#score {
+	display: none;
+	margin: 20px;
+	padding: 15px;
+	border: 10px solid #f27e7e;
+}
+
+#startGame, #battle {
+	padding: 20px;
+}

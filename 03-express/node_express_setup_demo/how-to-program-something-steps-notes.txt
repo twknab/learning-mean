@@ -1,0 +1,39 @@
+/////////////////
+//
+// Here's a good Order Of Operations when starting an Express project:
+//
+/////////////////
+
+
+CREATE PACKAGE.JSON:
+	+ npm init
+	+ npm install <dependency> --save
+
+
+IMPORT DEPENDENCIES:
+	+ 'ejs' (templating engine)		
+	npm install ejs --save
+
+	+ 'express' (framework we're using to build our server and routes) 
+	npm install express --save
+
+	+ 'body-parser' (parses incoming request bodies and makes data available to us) 
+	npm install body-parser --save
+
+
+BUILD APP/SERVER.JS:
+	+ create server.js file
+	+ define dependencies (express, body-parser)
+	+ define port
+	+ define app = express();
+	+ app.set views folder
+	+ app.set views ejs engine
+	+ app.get index
+	+ app.listen(port)
+
+
+BUILD INDEX.EJS:
+	+ frame out html
+	+ make sure to save as .ejs
+
+

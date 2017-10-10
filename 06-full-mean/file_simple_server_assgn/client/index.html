@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>My Simple Server!</title>
+	<!-- Load Stylesheet -->
+	<link rel="stylesheet" href="assets/style.css">
+	<!-- Angular & Angular Route Setup -->
+	<script src="angular/angular.js"></script>
+	<script src="angular-route/angular-route.js"></script>
+	<!-- Angular App Setup -->
+	<script src="js/config/app.js"></script>
+	<!-- Angular Factories Setup -->
+	<script src="js/factories/angular-friendFactory.js"></script>
+	<!-- Angular Controllers Setup -->
+	<script src="js/controllers/angular-indexController.js"></script>
+	<script src="js/controllers/angular-newController.js"></script>
+	<script src="js/controllers/angular-showController.js"></script>
+	<script src="js/controllers/angular-editController.js"></script>
+	<!-- Import jQuery -->
+	<script src="jquery/dist/jquery.js"></script>
+</head>
+<body ng-app="app">
+	<h1>Welcome to my Simple Server!</h1>
+	<p>In this assignment we create our first full stack MEAN assignment, using Node, Express, Angular and Mongo/Mongoose!</p>
+	<div ng-view></div>
+</body>
+</html>

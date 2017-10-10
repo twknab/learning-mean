@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Learning About Sockets</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script src="/socket.io/socket.io.js"></script>
+	<script>
+		$(document).ready(function() {
+		
+			/*
+				We're going to use 2 methods to do the same thing, to show how 
+				traditional http requests would accomplish it one way and how
+				sockets can do the same thing but much more efficiently.
+			*/
+		
+			/*
+				OLD SCHOOL: TRADITIONAL HTTP REQUEST: Here's one way we can attempt to get data:
+			*/
+
+			function getStockPrice() { // ping '/price' route (which will return a price value)
+				$.ajax({
+					url: '/price',
+				})
+				.done(function(serverResponse) {
+					// console.log(serverResponse);
+					$('#price').text('$'+serverResponse);
+				})
+			};
+			getStockPrice();
+
+			$('button').click(getStockPrice); // another way to run the function above
+
+			// run an ajax request for a new stockPrice every 2 seconds
+			setInterval(getStockPrice, 2000);
+
+
+			/* 
+				NOTE THE ABOVE IS THE TRADITIONAL WAY BUT INEFFICIENT:
+				this method of updating our stock price is bandwidth costly.
+				this is because we are pinging the server every 2 seconds.
+				instead, let's have the SERVER initiate to the client any time
+				the stock price changes. this is the beauty of sockets and can
+				handle n-times more connections than tradtional http requests 
+			*/
+
+
+			/*
+				EVOLUTION BABY: INCREASE EFFICIENCY WITH SOCKETS: let's do this instead with sockets!
+			*/
+
+			// this is now available to us after we've imported our socket.io script!
+			// notice here how we create the 'socket' variable and assign it to our connect
+			console.log(io);
+			var socket = io.connect();
+
+			socket.on('hello', function(){
+				console.log('hello event has been initiated from server') // ON CLIENT SIDE
+			})
+
+			socket.on('helloParams', function(myData){ // example of receiving data from server
+				console.log(myData) // ON CLIENT SIDE
+			})
+
+			socket.emit('hi');
+
+			socket.on('stockUpdated', function(stockPrice){
+				$('#price2').text('$'+stockPrice);
+			});
+
+			// when chat button is clicked, data is sent to server, which iniates a response to update all text
+			$('#chat').click(function(event) {
+				var inputText = $('input').val();
+				socket.emit('somethingSaid', inputText);
+				$('input').val('');
+			});
+			
+			// when server sends textUpdated, the chat contents are ovewritten
+			socket.on('textUpdated', function(text){
+				$('#text').append('<p>'+text+'</p>');
+			})
+
+		}); // end document ready
+	</script>
+</head>
+<body>
+	<h1>Learning About Sockets</h1>
+	<h2>Stock Price(traditional http requests): <span id='price'></span></h2>
+	<h2>Stock Price(using sockets): <span id='price2'>Waiting for price...</span></h2>
+	<button>Get Stock Price</button>
+	<hr>
+	<h4>Chat:</h4>
+	<div id='text'></div>
+	Say something: <input type="text">
+	<button id='chat'>Say Something</button>
+</body>
+</html>

@@ -1,0 +1,11 @@
+<h1>Edit <span ng-bind="foundFriend.first_name"></span> <span ng-bind="foundFriend.last_name"></span></h1>
+<fieldset><legend>Edit User Data:</legend>
+	<form ng-submit="update(foundFriend._id)">
+		First Name: <input type="text" ng-model="foundFriend.first_name" value="foundFriend.first_name" name="first_name">
+		Last Name: <input type="text" ng-model="foundFriend.last_name" value="foundFriend.last_name" name="last_name">
+		Birthday: <input type="date" ng-model="foundFriend.birthday" name="birthday">
+		<button type="submit">Update Friend</button>
+	</form>
+</fieldset>
+<p><strong>Note</strong>: A new <em>'updatedAt'</em> timestamp will automatically be sent to the Mongo database.</p>
+<a href="/#/">Take Me Home</a>

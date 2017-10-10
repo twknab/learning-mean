@@ -1,0 +1,18 @@
+* {
+	font-family: monospace;
+	color: white;
+	text-shadow: 1px 1px 3px black;
+	margin: 5px;
+}
+
+button, input[type="submit"], input[type="text"] {
+	color: black;
+	text-shadow: none;
+}
+body {
+	background-color: #03a9f4;
+}
+
+form {
+	margin: 0px;
+}

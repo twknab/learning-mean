@@ -1,0 +1,38 @@
+<!-- HTML file for Product Factory Assignment - this helps us practice
+Creating and Destroying objects inside of our factories, and learning
+how to pass this data to our $scope so that we can access them in our
+views. -->
+
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="style.css">
+	<script src="bower_components/angular/angular.js"></script>
+	<script src="main.js"></script>
+</head>
+<body ng-controller="productController">
+	<h1>Product Factory in Angular</h1>
+	<h3>Add a product:</h3>
+	<form ng-submit="create()">
+		Product Name: <input type="text" ng-model="product.name">
+		Product Price: <input type="number" ng-model="product.price">
+		<input type="submit" value="Add Product">
+	</form>
+	<fieldset><legend>Products List</legend>
+		<table>
+			<tr>
+				<th>Name:</th>
+				<th>Price:</th>
+				<th>Actions:</th>
+			</tr>
+			<tr ng-repeat="product in products | orderBy: 'price' track by $index">
+				<td ng-bind="product.name"></td>
+				<td ng-bind="product.price | currency"></td>
+				<td><button ng-click="delete($index)">Delete Product</button></td>
+			</tr>
+		</table>
+	</fieldset>
+</body>
+</html>

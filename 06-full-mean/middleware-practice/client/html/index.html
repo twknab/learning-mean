@@ -1,0 +1,14 @@
+<h1>Middleware Fun</h1>
+<p>Entering a name into the username field below to create a user and session information based upon this new user.</p>
+<form ng-submit="create()">
+    <label for="nameField">Username:
+        <input type="text" id="nameField" ng-model="person.username">
+    </label>
+    <input type="submit" value="Create Session!">
+</form>
+<fieldset style="padding: 20px; margin-top: 20px;"><legend>$scope Person Data:</legend>
+    {{newUser}}
+</fieldset>
+<fieldset style="padding: 20px; margin-top: 20px;"><legend>req.user Middleware Information:</legend>
+    {{info}}
+</fieldset>

@@ -1,0 +1,7 @@
+.survey{
+	display: none;
+	padding: 20px;
+	margin: 15px;
+	background-color: lightgreen;
+	border: 2px solid green;
+}

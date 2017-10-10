@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Survey Form Assignment</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<h1>Survey Form Assignment</h1>
+	<form action="/result" method='POST'>
+		<label for='name'> Your Name: 
+			<input type="text" name="name" id='name' required>
+		</label>
+		<label for='location'> Favorite Location: 
+			<select name="location" id="location" required>
+				<option value="None">Choose One...</option>
+				<option value="Seattle">Seattle</option>
+				<option value="Chicago">Chicago</option>
+				<option value="Dallas">Dallas</option>
+			</select>
+		</label>
+		<label for='language'> Favorite Language: 
+			<select name="language" id="language" required>
+				<option value="None">Choose One...</option>
+				<option value="Javascript">Javascript</option>
+				<option value="Python">Python</option>
+				<option value="C">C</option>
+			</select>
+		</label>
+		<label for='comments'> Enter a comment (optional): 
+			<textarea name="comments" id="comments" cols="30" rows="10" placeholder='Enter a comment here if you wish'></textarea>
+		</label>
+		<input type="submit" value="Submit My Survey!">
+	</form>
+</body>
+</html>

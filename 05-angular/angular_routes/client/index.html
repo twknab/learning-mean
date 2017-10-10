@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+	<meta charset="UTF-8">
+	<title>Angular Routes Practice</title>
+	<script src="angular/angular.js"></script>
+	<script src="angular-route/angular-route.js"></script>
+	<script>
+
+		// Setup app:
+		var app = angular.module('app', ['ngRoute']); // ngRoute is necessary to load the partials and is called into our module here.
+
+		// Setup routing:
+		app.config(function($routeProvider){
+			$routeProvider
+				.when('/partial1', {
+					templateUrl: 'partials/partial1.html',
+					controller: 'partial1Controller' // you can include the parameter 'controller' and supply it the controller name
+				})
+				.when('/partial2', {
+					templateUrl: 'partials/partial2.html',
+					// here we've exempted the controller parameter and instead call it the old fashioned way in our HTML
+				})
+				.otherwise({
+					redirectTo: '/'
+				});
+		});
+
+		// Build the Controllers:
+		app.controller('partial1Controller', function($scope){
+			$scope.hobbies = ['disc golf', 'hiking', 'biking', 'strength training', 'guitar playing'];
+		})
+		app.controller('partial2Controller', function($scope){
+			$scope.message = 'This message is generated from our second controller being used now!'
+		})
+
+	</script>
+</head>
+<body>
+	<div ng-view><!-- this is where partials will load --></div>
+	<h1>Angular Routes Practice</h1>
+	<a href="/">Home</a>
+	<a href="#/partial1">Partial 1</a> <!-- the '#' is crucial for angular to know it is a partial -->
+	<a href="#/partial2">Partial 2</a>
+</body>
+</html>

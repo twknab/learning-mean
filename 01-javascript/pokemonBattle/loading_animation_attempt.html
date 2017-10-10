@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script>
+
+    function rotateAnimation(elementId, speed){
+
+        for(i = 0; i<=360; i++){
+            setTimeout( function(){
+                document.getElementById(elementId).style.transform = 'rotate('+i+'deg)';
+                console.log('rotated!')
+            } , speed);
+        }
+
+      
+      };//end rotateAnimation
+
+    </script>
+
+
+
+</head>
+<body>
+    <img src='static/images/loading.png' alt='loading deck...' id='loading' >
+    <script>rotateAnimation('loading', 2000);</script>
+</body>
+</html>
+
+
+
+
+
+

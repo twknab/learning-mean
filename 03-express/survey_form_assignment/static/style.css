@@ -1,0 +1,39 @@
+* {
+	font-family: monospace;
+}
+
+body {
+	background: lightsalmon;
+}
+
+h1 {
+	text-align: center;
+}
+
+form, .result {
+	margin: 0px auto 0px auto;
+    width: 400px;
+    text-align: center;
+}
+
+label {
+	padding: 20px;
+	display: block;
+}
+
+textarea {
+	margin-top: 10px;
+}
+
+input[type='submit'] {
+	display: block;
+	margin: 0px auto 0px auto;
+}
+
+input[type='text'], textarea {
+	padding: 10px;
+}
+
+select {
+	height: 30px;
+}

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Ajax and Sockets.io!</title>
+	<link rel="stylesheet" href="style.css">
+    <!--very important js imports here (jquery AND socket.io):-->
+	<script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script type ="text/javascript" src="/socket.io/socket.io.js"></script>
+    <!-- begin front end -->
+	<script>
+	$(document).ready(function(){
+		// STOCK GENERATOR:
+		var getStock = function(){
+			$.get('/stock',function(myData){
+				$('#stockPrice').html('Current Price: $'+myData.stock); // note that the stock data was handed back to us in server.js
+			});
+			 /* 
+
+			 	Here's another way to do the same thing as the .get() above but using .ajax:
+
+					$.ajax({
+						url: '/stock'
+					})
+					.done(function(stockPrice){
+						console.log(stockPrice);
+						$('#stock_price').html('Current Price: '+stockPrice.stock);
+					});
+
+			*/
+		}; // end getStock()
+
+		getStock(); // get stock on page load
+		setInterval(function(){ // every 5 seconds get stock again
+			getStock();		
+		}, 3000);
+		
+		// HOOK INTO SOCKET
+		var socket = io.connect();
+		// EVENT TRIGGERS/LISTENERS
+		socket.on('connected', function(welcome){
+			console.log(welcome.message);
+		});
+		socket.on('updateChatText', function(chatData){
+			console.log('updating...')
+			console.log(chatData);
+			$('#chat').html(chatData.chatText.chatContents);
+		})
+
+
+		$('#chatBtn').click(function(){
+			var chatData = $('form').serializeArray();
+			console.log(chatData[0].value);
+			$('#chat').append('<p>'+chatData[0].value+'</p>');
+			$('#sendChat').val('');
+			socket.emit('chat', {chatContents: $('#chat').html()});
+		})
+
+	}); // end doc ready
+	</script>
+	<!-- end front end -->
+</head>
+<body>
+	<h1>Stock Prices App!</h1>
+	<h3 id='stockPrice'>Current Price: </h3>
+	<h6>Updated every 3 seconds.</h6>
+	<div id='chat'></div>
+	<form action="/chat" method='POST'>
+		Enter a message: <input type="text" name="sendChat" id="sendChat">
+		<input type="submit" id='chatBtn' value="Send Message!">
+	</form>
+</body>
+</html>

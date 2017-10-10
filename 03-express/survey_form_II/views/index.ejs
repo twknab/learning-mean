@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Survey Revisited with Sockets.io!</title>
+	<link rel="stylesheet" href="style.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="main.js"></script>
+</head>
+<body>
+	<h1>Welcome to the New Survey Powered by Sockets!</h1>
+	<div class='survey'></div>
+	<!--Note: this form never sends-->
+	<form action="/submitSurvey" method="POST">
+		Your Name: <input type="text" name='name' id="name" required>
+		Your Location: <select name="location" id="location" required>
+			<option value="None">Choose Location...</option>
+			<option value="Dallas">Dallas</option>
+			<option value="Seattle">Seattle</option>
+			<option value="Chicago">Chicago</option>
+		</select>
+		Your Favorite Language: 
+			<select name="language" id="language" required>
+				<option value="None">Choose Language...</option>
+				<option value="javascript">Javascript</option>
+				<option value="python">Python</option>
+				<option value="ruby">Ruby</option>
+			</select>
+		Your Comments: <textarea name="comments" id="comments" cols="30" rows="10"></textarea>
+		<input type="submit" value="Submit Survey!" id='submitBtn'>
+	</form>
+</body>
+</html>

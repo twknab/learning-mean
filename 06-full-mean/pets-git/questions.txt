@@ -1,0 +1,2 @@
+1. Confusion 1 is in server/config/routes.js
+2. Confusion 2 is in client/js/ang_config/ang_app.js

@@ -1,0 +1,18 @@
+{
+  "name": "meanLogin",
+  "description": "",
+  "main": "server.js",
+  "authors": [
+    "Mike Hannon <mjhannon@gmail.com>"
+  ],
+  "license": "ISC",
+  "moduleType": [],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

@@ -1,0 +1,71 @@
+<html>
+<head>
+	<title>Javascript Demo</title>
+	<style>
+		body {
+			background-color:black;
+			font-family: monospace;
+			color:white;
+			font-size:50px;
+			text-align: center;
+			margin-top:20%;
+		}
+
+		#magic{
+			color: #777;
+			border-right: 1px solid #777;
+			padding-right: 7px;
+			display: inline;
+		}
+	</style>
+</head>
+<body>
+
+	Coding is <div id="magic"></div>
+
+	<script>
+
+		/*
+		
+		bug1: changed if statement below so if character count == word[word_counter].length +1 (added the plus one so all characters display)
+
+		bug2: poor-spacing momentum (hanging). i had to examine the answer key for this one (very tricky). what we had to do here, was inside the function, we created a new variable called 'character'. We set this variable to be 'words[word_counter][character_counter++]'. We then use an IF statement to evaluate if any of the character values is a ' '(space). If so, we replace the space with a '&nbsp;'
+
+			(note, I was trying (but failing) to somehow add the nbsp; in between each word of the sentence (was looking around for JS functions), but we can do this ourselves as the example below showscases)
+
+		*/
+
+		var words = ["fun", "exciting", "about not giving up", "being helpful", "being open", "what I learned at CodingDojo!"],
+			el = document.getElementById('magic'),
+			word_counter = 0,
+			character_counter = 0;
+
+		function updateText()
+		{
+			var character = words[word_counter][character_counter++];
+
+			if( character === ' '){
+				character = "&nbsp;"
+			};
+
+			el.innerHTML = el.innerHTML+character;
+
+			if(character_counter == words[word_counter].length +1)
+			{
+				word_counter++; 	//choose a different word
+				character_counter = 0;	//start over with the first character of the word
+				el.innerHTML = '';  //set the html to be blank
+
+				//if we're displaying the last word, go back to the first word
+				if(word_counter == words.length)
+					word_counter = 0;
+			}
+		}
+
+		setInterval(updateText,600);
+
+	</script>
+
+</body>
+
+</html>

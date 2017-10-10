@@ -1,0 +1,18 @@
+<input type="text" placeholder="Filter by Birthday!" ng-model="myFilter">
+<table>
+	<tr>
+		<th>Name:</th>
+		<th>Show:</th>
+		<th>Update:</th>
+		<th>Delete:</th>
+		<th>Birthday:</th>
+	</tr>
+	<tr ng-repeat="friend in friends | filter: myFilter track by $index">
+		<td><span ng-bind="friend.first_name"></span> <span ng-bind="friend.last_name"></span></td>
+		<td><a href="#/show/{{friend._id}}">Show</a></td>
+		<td><a href="#/edit/{{friend._id}}">Edit</a></td>
+		<td><button ng-click="destroy(friend._id)">Delete</button></td>
+		<td>{{friend.birthday | date}}</td>
+	</tr>
+</table>
+<a href="#/create">Create New Friend</a>

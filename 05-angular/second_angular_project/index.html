@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" ng-app>
+<head>
+	<meta charset="UTF-8">
+	<title>My Second Angular Project</title>
+	<script src='bower_components/angular/angular.js'></script>
+</head>
+<!-- We can use ng-init for things like a string -->
+<body ng-init=" dojo='This header is created using ng-init for a string!' ">
+	<h1>My Second Angular Project</h1>
+	<h2 ng-bind="dojo"></h2>
+	<p>The following list is made using ng-init for an array:</p>
+
+	<!-- We can use ng-init for things like an array -->
+	<div ng-init="students=['Mike', 'Mary', 'Juan']">
+		<ul>
+			<li ng-repeat="student in students" ng-bind="student"></li>
+		</ul>
+	</div>
+
+	<!-- We can use ng-init for things like an array of objects! -->
+	<div ng-init=" moreStudents=[{name: 'Timothy', age: 32},{name: 'Julianna', age: 28},{name: 'Chris', age: 28},{name: 'Vida', age: 60}] ">
+		<p>Listing students using Angular filters, ( mySomething | json ):</p>
+		<ul>
+			<li ng-repeat="student in moreStudents" ng-bind="student | json"></li>
+		</ul>
+		<p>Listing students using { {  bracket } } Angular notation:</p>
+		<ul>
+			<li ng-repeat="student in moreStudents">{{student.name}} {{student.age}}</li>
+			
+		</ul>
+	</div>
+
+	<!-- We can us ng-model to tie into real-time data! -->
+	<div>
+		<p>Here's how you can use ng-model to two-way tie data -- type something to see real-time:</p>
+		<form>
+			Type something: <input type="text" name="text" ng-model="inputText">
+		</form>
+		<h5 ng-bind="inputText"></h5>
+	</div>
+</body>
+</html>

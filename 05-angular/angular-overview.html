@@ -1,0 +1,116 @@
+<!-- 
+//////////////////
+//
+//	SETTING UP ANGULAR
+//
+//////////////////
+-->
+
+	<!-- (1) download Angular from website or 'bower install angular' or 'npm install angular' -->
+
+	<!-- (2) link up Angular in a script tag in your HTML file: -->
+		<script src='bower_components/angular/angular.js'></script>
+
+	<!-- (3) that's it! you can use angular now! -->
+
+
+
+
+
+
+<!-- 
+//////////////////
+//
+//	SETTING UP DIRECTIVES
+//
+//////////////////
+-->
+
+	<!-- (1) add 'ng-app' to <html> tag to give angular access to document -->
+		<html lang="en" ng-app>
+			<!-- ...rest of HTML content, ie, head, body, etc -->
+		</html>
+
+	<!-- (2) we can use 'ng-init' to declare a variable for testing (note, 'ng-init' is not used) -->
+		<html lang="en" ng-app>
+			<body ng-init=" dojo='ninja' "> <!-- sets up variable -->
+				<h1>{{ dojo }}</h1> <!-- (i) one of two ways to invoke the variable for printing to DOM -->
+				<h2 ng-bind="dojo"></h2> <!-- (ii) another way to invoke the variable for printing to DOM-->
+			</body>
+			<!-- ...rest of HTML content, ie, head, body, etc -->
+		</html>
+
+	<!-- (3) see your first and second angular assignments in the
+	HTML file for more examples of directives that can be used. -->
+
+
+
+
+
+
+<!-- 
+//////////////////
+//
+//	SETTING UP MODULES
+//
+//////////////////
+-->
+
+	<!-- We can create modules in our apps by adding a name to our
+	ng-app and then creating a module using angular.module in a
+	script tag in our <head>. Note: whatever name you use to define
+	your app must also be the first argument when creating your module -->
+
+		<html ng-app="myApp">
+			<head>
+				<script src="angular.js"></script>
+				<script>
+					var myAppModule = angular.module('myApp', []); // name must match ng-app above
+				</script>
+			</head>
+			<body></body>
+		</html>
+
+
+
+
+
+
+<!-- 
+//////////////////
+//
+//	SETTING UP CONTROLLERS
+//
+//////////////////
+-->
+
+
+	<!-- Controllers allow us to pass data to our views. Using the $scope variable glues together the controller and the view.
+
+	When we setu our controller we want to define it in the top script tag, and we must give it a name which we must use to call to it later -->
+
+		<html ng-app="myApp">
+			<head>
+				<script src="angular.js"></script>
+				<script>
+					var myAppModule = angular.module('myApp', []); // name must match ng-app above
+					myAppModule.controller('studentsController', function($scope){
+						$scope.students = [
+							{name: 'Tim', age: 32},
+							{name: 'Jack', age: 24},
+							{name: 'Wilbur', age: 116},
+						];
+					});
+				</script>
+			</head>
+			<body>
+				<div ng-controller="studentsController">
+					<ul>
+						<!-- the data from the controller above should be available -->
+						<li ng-repeat="student in students">{{student.name}} {{student.age}}</li>
+					</ul>
+				</div>
+			</body>
+		</html>
+
+	<!-- see /modules_in_angular/index.html for more robust examples, or /modules_in_angular/using_this/index.html -->

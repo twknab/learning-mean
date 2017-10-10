@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>My First Angular Project</title>
+	<script src = 'bower_components/angular/angular.js'></script>
+	<script>
+		var app = angular.module('app',[]);
+		console.log(app);
+
+		// This code creates a new controller:
+		app.controller('PlayersController', ['$scope', function($scope) {
+			//javascript that controls the Player view goes here:
+		}]);
+
+		// If we want access to other Angular objects, all we do is inject other objects from the app in!
+		app.controller('PlayersController', ['$scope', 'newinjectable', function($scope, "custom name of new injectable") {
+			//javascript that controls the Player view goes here:
+		}]);
+		/*
+			Now our PlayersController has access to $scope and newinjectable. To use the methods and properties of $scope, we’ll access them using $scope.method or property. To access newinjectable, which could be a factory, we’ll access it by whatever custom name we gave it and its properties by using a period(.). For Example, the newinjectable custom name is UserFactory, we can do something like UserFactory.addNewUser().
+
+			Similarly to our controller example, many of our factories are injected with the $http service object. This object makes our AJAX calls to the DB. Similar to jQuery $.get, $.ajax, $.post methods.
+		*/
+	</script>
+</head>
+<body>
+	<h1>Hello Angular!</h1>
+</body>
+</html>

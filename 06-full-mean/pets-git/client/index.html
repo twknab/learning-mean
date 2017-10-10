@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Load up Angular and Angular Route -->
+    <script src="angular/angular.js"></script>
+    <script src="angular-route/angular-route.js"></script>
+    <!-- Load up Angular Configuration, Module and Routes  -->
+    <script src="js/ang_config/ang_app.js"></script>
+    <!-- Load up Angular Pet Index Controller -->
+    <script src="js/ang_controllers/ang_pet_index_controller.js"></script>
+    <!-- Load up Angular Pet Create Controller -->
+    <script src="js/ang_controllers/ang_pet_create_controller.js"></script>
+    <!-- Load up Angular Pet Show Controller -->
+    <script src="js/ang_controllers/ang_pet_show_controller.js"></script>
+    <!-- Load up Angular Pet Edit Controller -->
+    <script src="js/ang_controllers/ang_pet_edit_controller.js"></script>
+    <!-- Load up Angular Pet Factory -->
+    <script src="js/ang_factories/ang_pet_factory.js"></script>
+    <!-- Load CSS Stylings -->
+    <link rel="stylesheet" href="css/style.css">
+    <title>Pets</title>
+</head>
+<body>
+    <h1>Pets and Owners MEAN</h1>
+    <p>This portion of this page is not a partial. But everything below this sentence is!</p>
+    <div ng-view><!-- this is where partials will load --></div>
+</body>
+</html>

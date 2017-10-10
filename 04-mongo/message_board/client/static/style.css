@@ -1,0 +1,46 @@
+* {
+	font-family: monospace; 
+	margin: 15px;
+}
+.makePost {
+    padding: 20px;
+    border-radius: 15px;
+    background-color: #673AB7;
+    color: white;
+    text-shadow: 1px 1px 1px black;
+}
+.message {
+	padding: 20px;
+	background-color: #CDDC39;
+	border-radius: 15px;
+    color: white;
+    text-shadow: 1px 1px 1px black;
+}
+.comment {    
+	margin-left: 80px;
+    padding: 20px;
+    background-color: #00BCD4;
+    border-radius: 15px;
+    color: white;
+    text-shadow: 1px 1px 1px black;
+}
+.makeComment {
+	margin-left: 80px;
+	padding: 20px;
+	background-color: #FF5722;
+	border-radius: 15px;
+    color: white;
+    text-shadow: 1px 1px 1px black;
+}
+.bold {
+	font-weight: bolder;
+}
+.large {
+	font-size: 1.4em;
+}
+.commentTitle {
+	margin-left: 80px;
+}
+.error {
+	color: red;
+}

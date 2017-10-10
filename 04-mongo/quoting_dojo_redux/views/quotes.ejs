@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Quotes</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<h1>Here Are My Awesome Quotes!</h1>
+	<% if (quotes) { %>
+		<% for (var x in quotes) { %>
+			<div class='quoteWrapper'>
+				<div class='arrows'>
+					<form action='/<%=quotes[x]._id%>/upVote' method='GET'>
+						<input type='submit' class='upArrow' value='&#x21DE;'>
+					</form>
+					<form action='/<%=quotes[x]._id%>/downVote' method='GET'>
+						<input type='submit' class='downArrow' value='&#x21DF;'>
+					</form>
+				</div>
+				<div class='vote'><%=quotes[x].vote%></div>
+				<div class='quote'>
+					<h2>"<%=quotes[x].quote%>"</h2>
+					<p>--<%=quotes[x].name%> at <%=quotes[x].createdAt.toLocaleTimeString()%> on <%=quotes[x].createdAt.toDateString()%></p>
+				</div>
+			</div>
+			<hr>
+		<% } %>
+	<% } %>
+	<form action="/">
+		<button type='submit'>Back Home</button>
+	</form>
+</body>
+</html>

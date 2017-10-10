@@ -1,0 +1,18 @@
+#card {
+	margin: 0px;
+	font-size: 15em;
+}
+
+#card li {
+	margin: 0px;
+	display: inline-block;
+}
+
+#clear, #playerTitle, #shuffle, #deal, #discard, #resetDeck {
+	display: none;
+}
+
+#status {
+	width: 300px;
+	height: 90px;
+}

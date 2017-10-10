@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Quoting Dojo</title>
+	<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css"> -->
+	<link rel="stylesheet" href="style.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> <!-- REMEMBER JQUERY WHEN DOING YOUR AJAX -->
+	<script>
+		$(document).ready(function() {
+
+			// defines structure for how quotes will be built
+			// note: I specifically used html_str to make it easier to read (else it would be a huge block of joined strings and hard to read)
+			// maybe there is a way this can be improved even more?
+			function buildAllQuotes(allQuotes){
+				$('div.allQuotes').html('');
+				for (var x in allQuotes){
+					var time = new Date (allQuotes[x].createdAt).toLocaleTimeString();
+					var date = new Date (allQuotes[x].createdAt).toDateString();
+					var html_str = '<div class="quoteWrapper">';
+					html_str += '<div class="arrows">';
+					html_str += '<form action="/'+allQuotes[x]._id+'/upVote" method="GET">';
+					html_str += '<input type="submit" class="upArrow" value="&#x21DE;">';
+					html_str += '</form>';
+					html_str += '<form action="/'+allQuotes[x]._id+'/downVote" method="GET">';
+					html_str += '<input type="submit" class="downArrow" value="&#x21DF;">';
+					html_str += '</form>';
+					html_str += '</div>';
+					html_str += '<div class="vote">'+allQuotes[x].vote+'</div>';
+					html_str += '<div class="quote">'
+					html_str += '<h2>'+allQuotes[x].quote+'</h2>';
+					html_str += '<p>--'+allQuotes[x].name+' at '+time+' on '+date+'</p>';
+					html_str += '</div>';
+					html_str += '<form action="" class="destroy" method="GET" mongoID="'+allQuotes[x]._id+'">';
+					html_str += '<input type="submit" value="Delete">';
+					html_str += '</form>';
+					html_str += '</div>';
+					html_str += '<hr>';
+					$('div.allQuotes').append(html_str);
+				}
+			};
+
+			// Make Quote:
+			$('form#makeQuote').submit(function(event) {
+				event.preventDefault();
+				$.ajax({
+					url: '/ajax_quotes',
+					method: 'POST',
+					data: $(this).serialize(),
+				})
+				.done(function(allQuotes) {
+					console.log("Successful AJAX request and returned data!");
+					console.log(allQuotes);
+					buildAllQuotes(allQuotes);
+				})
+				.fail(function(err) {
+					console.log("Error with AJAX request to make quote and show all quotes!", err);
+				})
+				.always(function() {
+					console.log("Complete");
+				});
+			}); // end make quote button
+
+			// Show All Quotes:
+			$('form#showQuotes').submit(function(event){
+				event.preventDefault();
+				$.ajax({
+					url: '/ajax_quotes',
+					method: 'GET',
+				})
+				.done(function(allQuotes) {
+					console.log("Showing all quotes...success", allQuotes);
+					buildAllQuotes(allQuotes);
+				})
+				.fail(function(err) {
+					console.log("Error AJAX retrieving all quotes... ", err);
+				})
+				.always(function() {
+					console.log("Complete");
+				})
+			});
+			
+			// Destroy A Quote
+			// I think your selector is bunk.
+			// Once we removed the action='' attribute, this below won't even fire
+			// Is there a different way you can see if you are selecting the right thing?
+			$('form.destroy').submit(function(event){
+				console.log('did this load?')
+				event.preventDefault();
+				$.ajax({
+					url: '/'+$(this).attr('mongoID')+'/destroy',
+					method: 'GET',
+					data: $(this).attr('mongoID').serialize(),
+				})
+				.done(function(allQuotes){
+					console.log('Showing quotes now again after delete...');
+					buildAllQuotes(allQuotes[0]);
+				})
+				.fail(function(err){
+					console.log('Error getting ajax quotes after deletion...', err);
+				})
+				.always(function(){
+					console.log('Deleted');
+				})
+				return false;
+			});
+
+		}); // end doc ready
+	</script>
+</head>
+<body>
+	<h1>Welcome to Quoting Dojo (Now...roided up with AJAX)</h1>
+	<form id='makeQuote' action="/ajax_quotes" method="POST">
+		Name: <input type="text" name="name" id="name">
+		Quote: <input type="text" name="quote" id="quote">
+		<input type="hidden" name="vote" id="vote" value=0>
+		<input type="submit" value="AJAX Add My Quote!">
+	</form>
+	<form id='showQuotes' action='/ajax_quotes' method='GET'>
+		<button formaction="/ajax_quotes" formmethod="GET" type="submit">AJAX Skip To Quotes</button>
+	</form>
+	<div class='allQuotes'></div>
+</body>
+</html>

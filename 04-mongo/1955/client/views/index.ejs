@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>1955</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			$.ajax({
+				url: '/all',
+				type: 'GET',
+				dataType: 'json',
+			})
+			.done(function(allPeople) {
+				console.log("success");
+				var htmlStr = '';
+				for (var x in allPeople){
+					htmlStr += '<h1>'+allPeople[x].name+'</h1>';
+					htmlStr += '<hr>';
+				}
+				$('body').html(htmlStr);
+			})
+			.fail(function() {
+				console.log("error");
+			})
+			.always(function() {
+				console.log("complete");
+			});
+			
+		});
+	</script>
+</head>
+<body>
+</body>
+</html>
