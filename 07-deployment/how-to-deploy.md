@@ -110,17 +110,19 @@
 
     3. Paste and modify the following code into vim after hitting `i`:
 
-`server {
-    listen 80;
-    location / {
-        proxy_pass http://{{PRIVATE-IP}}:8000;
-        proxy_http_version 1.1;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection 'upgrade';
-        proxy_set_header Host $host;
-        proxy_cache_bypass $http_upgrade;
-    }
-}`
+        ```
+        server {
+            listen 80;
+            location / {
+                proxy_pass http://{{PRIVATE-IP}}:8000;
+                proxy_http_version 1.1;
+                proxy_set_header Upgrade $http_upgrade;
+                proxy_set_header Connection 'upgrade';
+                proxy_set_header Host $host;
+                proxy_cache_bypass $http_upgrade;
+            }
+        }
+        ```
 
         This code says: have the reverse proxy server (nginx) listen at port 80. When going to root /, listen for http requests as though you were
         actually http:// your private ip and the port your server is listening e.g @8000 or @6789 etc.
